@@ -1,21 +1,38 @@
-const text = document.querySelector('textarea')
-const totalWords = document.querySelector('#totalWords')
+var text = document.querySelector('textarea')
+var totalWords = document.querySelector('#totalWords')
+const boxResult = document.querySelector('.boxResult')
 
-let valueText
+
+var valueText
+
 
 text.addEventListener('keyup', changeText)
 
 function changeText(){
     valueText = text.value
-    console.log(valueText)  
 
     wordCounter()
 }
 
 function wordCounter(){
-   var counter = 0
-     valueText.replace(/(?:^|\s )\S/, function(counter){
-      counter =+ 1
-    })
-    console.log(counter)
+  var counter = 0
+  valueText.replace(/[^\s]+/g, function(){
+    counter = counter + 1
+  })
+  console.log(counter)
+
+  createCounterBox(counter)
+}
+
+
+function createCounterBox(counter){
+
+  const counterHTML = `
+  <div>
+    <h2>Palavras: ${counter}</h2>
+  </div>
+
+  `
+  boxResult.innerHTML = counterHTML
+
 }
